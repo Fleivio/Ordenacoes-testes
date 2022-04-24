@@ -19,4 +19,5 @@ void sortingBCouting(int *vet, int tam);
 void mergeSort(int *vet, int tam);
 void radixSort(int *vet, int tam);
 
+void heapSort(int *vet, int tam);
 #endif
