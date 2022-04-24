@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <limits.h>
 
-void selectionSort(int *vet){
+void selectionSort(int *vet, int tam){
     int min;
-    for(int i = 0; i < TAM; i++){
+    for(int i = 0; i < tam; i++){
         min = i;
-        for(int j = i+1; j < TAM; j++){
+        for(int j = i+1; j < tam; j++){
             if (vet[j] < vet[min])
                 min = j;
         }
@@ -19,19 +19,19 @@ void selectionSort(int *vet){
     }
 }
 
-void badSelectionSort(int *vet){
-    for(int i = 0; i < TAM; i++){
-        for(int j = i; j < TAM; j++){
+void badSelectionSort(int *vet, int tam){
+    for(int i = 0; i < tam; i++){
+        for(int j = i; j < tam; j++){
             if(vet[i] > vet[j])
                 swap(&vet[i],&vet[j]);
         }
     }
 }
 
-void insertionSort(int *vet){
+void insertionSort(int *vet, int tam){
     int eleito, j;
 
-    for(int i = 1; i < TAM; i++){
+    for(int i = 1; i < tam; i++){
         eleito = vet[i];
         j = i-1;
 
@@ -45,8 +45,8 @@ void insertionSort(int *vet){
 
 
 
-void simpleBubble(int *vet){
-    for(int i = TAM-1; i > 0; i--){
+void simpleBubble(int *vet, int tam){
+    for(int i = tam-1; i > 0; i--){
         for(int j = 0; j <= i; j++){
             if(vet[j] > vet[j+1]){
                 swap(&vet[j], &vet[j+1]);
@@ -55,9 +55,9 @@ void simpleBubble(int *vet){
     }
 }
 
-void whileBubble(int *vet){
+void whileBubble(int *vet, int tam){
     int ordened = 0;
-    int i = TAM - 1;
+    int i = tam - 1;
     while(!ordened && i > 0){
         ordened = 1;
         for(int j = 0; j < i; j++){
@@ -98,14 +98,14 @@ static void quickAux(int *vet, int begin, int end){
         quickAux(vet, i, end);
 }
 
-void quickSort(int *vet){
-    quickAux(vet, 0, TAM);
+void quickSort(int *vet, int tam){
+    quickAux(vet, 0, tam);
 }
 
-void cocktailSort(int *vet){
+void cocktailSort(int *vet, int tam){
     int ordened = 0;
     int bottom = 0;
-    int top = TAM - 1;
+    int top = tam - 1;
     
     while(ordened == 0 && bottom < top){
         ordened = 1;
@@ -128,19 +128,19 @@ void cocktailSort(int *vet){
     }
 }
 
-void oddEvenSort(int *vet){
+void oddEvenSort(int *vet, int tam){
     int ordened = 0;
     while(!ordened){
         ordened = 1;
 
-        for(int i = 1; i < TAM - 1; i += 2){
+        for(int i = 1; i < tam - 1; i += 2){
             if(vet[i] > vet[i+1]){
                 swap(&vet[i],&vet[i+1]);
                 ordened = 0;
             }
         }
 
-        for(int i = 0; i < TAM-1; i += 2){
+        for(int i = 0; i < tam-1; i += 2){
             if(vet[i] > vet[i+1]){
                 swap(&vet[i], &vet[i+1]);
                 ordened = 0;
@@ -149,10 +149,10 @@ void oddEvenSort(int *vet){
     }
 }
 
-void sortingBCouting(int *vet){
-    int *v = (int*) calloc(TAM, sizeof(int));
+void sortingBCouting(int *vet, int tam){
+    int *v = (int*) calloc(tam, sizeof(int));
 
-    for (int i = TAM-1; i >= 1; i--){
+    for (int i = tam-1; i >= 1; i--){
         for (int j = i-1; j >= 0; j--){
             if(vet[i] < vet[j])
                 v[j]++;
@@ -161,12 +161,12 @@ void sortingBCouting(int *vet){
         }
     }
 
-    int result[TAM];
-    for(int i = 0; i < TAM; i++){
+    int result[tam];
+    for(int i = 0; i < tam; i++){
         result[v[i]] = vet[i];
     }
 
-    for(int i = 0; i < TAM; i++){
+    for(int i = 0; i < tam; i++){
         vet[i] = result[i];
     }
     free(v);
@@ -213,17 +213,17 @@ static void part(int *vet, int p, int r){
     merge(vet, p, q, r);
 }
 
-void mergeSort(int *vet){
-    part(vet, 0, TAM);
+void mergeSort(int *vet, int tam){
+    part(vet, 0, tam);
 }
 
-void radixSort(int *vet) {
+void radixSort(int *vet, int tam) {
     int maior = vet[0];
     int exp = 1;
 
-    int *b = (int *)calloc(TAM, sizeof(int));
+    int *b = (int *)calloc(tam, sizeof(int));
 
-    for (int i = 0; i < TAM; i++) {
+    for (int i = 0; i < tam; i++) {
         if (vet[i] > maior)
     	    maior = vet[i];
     }
@@ -231,16 +231,16 @@ void radixSort(int *vet) {
     while (maior/exp > 0) {
         int bucket[10] = { 0 };
 
-    	for (int i = 0; i < TAM; i++)
+    	for (int i = 0; i < tam; i++)
     	    bucket[(vet[i] / exp) % 10]++;
 
     	for (int i = 1; i < 10; i++)
     	    bucket[i] += bucket[i - 1];
 
-    	for (int i = TAM - 1; i >= 0; i--)
+    	for (int i = tam - 1; i >= 0; i--)
     	    b[--bucket[(vet[i] / exp) % 10]] = vet[i];
 
-    	for (int i = 0; i < TAM; i++)
+    	for (int i = 0; i < tam; i++)
     	    vet[i] = b[i];
 
     	exp *= 10;

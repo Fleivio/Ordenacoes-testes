@@ -5,10 +5,10 @@
 #define VARIATION_RANGE 10000
 #define TAM 1000
 
-void popul(int *vet);
+void popul(int *vet, int tam);
 void swap(int *p1, int *p2);
-void printVet(int *vet);
-void singleTest(int *vet, void (*f)(int*));
-double speedTest( int *vet, void (*f)(int*) );
+void printVet(int *vet, int tam);
+void singleTest(int *vet, int tam, void (*f)(int*, int));
+double speedTest( int *vet, int tam, void (*f)(int*, int) );
 
 #endif
