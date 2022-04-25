@@ -2,22 +2,21 @@
 #define SORTERS
 
 
-void selectionSort(int *vet, int tam);
-void badSelectionSort(int *vet, int tam);
+void selectionSort(int *vet, int size);
+void badSelectionSort(int *vet, int size);
 
-void insertionSort(int *vet, int tam);
+void insertionSort(int *vet, int size);
 
+void simpleBubble(int *vet, int size);
+void whileBubble(int *vet, int size);
+void quickSort(int *vet, int size);
+void cocktailSort(int *vet, int size);
+void oddEvenSort(int *vet, int size);
 
-void simpleBubble(int *vet, int tam);
-void whileBubble(int *vet, int tam);
-void quickSort(int *vet, int tam);
-void cocktailSort(int *vet, int tam);
-void oddEvenSort(int *vet, int tam);
+void sortingBCouting(int *vet, int size);
 
-void sortingBCouting(int *vet, int tam);
+void mergeSort(int *vet, int size);
+void radixSort(int *vet, int size);
 
-void mergeSort(int *vet, int tam);
-void radixSort(int *vet, int tam);
-
-void heapSort(int *vet, int tam);
+void heapSort(int *vet, int size);
 #endif

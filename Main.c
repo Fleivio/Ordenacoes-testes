@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "global.h"
 #include "sorters.h"
@@ -10,7 +10,7 @@ int main(){
     int vet[TAM];
 
     // singleTest(vet, TAM, &heapSort);
-
+    {
     printf("\nBubble-while = %.3f secs",  speedTest(vet, TAM, &whileBubble));
     printf("\nCocktail sort = %.3f secs", speedTest(vet, TAM, &cocktailSort));
     printf("\nOdd-even sort = %.3f secs", speedTest(vet, TAM, &oddEvenSort));
@@ -20,4 +20,6 @@ int main(){
     printf("\nMerge sort = %.3f secs", speedTest(vet, TAM, &mergeSort));
     printf("\nRadix sort = %.3f secs", speedTest(vet, TAM, &radixSort));
     printf("\nHeap sort = %.3f secs", speedTest(vet, TAM, &heapSort));
+    }
+    
 }
