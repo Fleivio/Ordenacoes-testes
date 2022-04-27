@@ -28,22 +28,6 @@ void badSelectionSort(int *vet, int size){
     }
 }
 
-void insertionSort(int *vet, int size){
-    int eleito, j;
-
-    for(int i = 1; i < size; i++){
-        eleito = vet[i];
-        j = i-1;
-
-        while(vet[j] > eleito && j >= 0){
-            vet[j+1] = vet[j];
-            j--;
-        }
-        vet[j + 1] = eleito;
-    }
-}
-
-
 
 void simpleBubble(int *vet, int size){
     for(int i = size-1; i > 0; i--){
@@ -150,7 +134,7 @@ void oddEvenSort(int *vet, int size){
 }
 
 void sortingBCouting(int *vet, int size){
-    int *v = (int*) calloc(size, sizeof(int));
+    int v[TAM];
 
     for (int i = size-1; i >= 1; i--){
         for (int j = i-1; j >= 0; j--){
@@ -169,7 +153,6 @@ void sortingBCouting(int *vet, int size){
     for(int i = 0; i < size; i++){
         vet[i] = result[i];
     }
-    free(v);
 }
 
 
@@ -278,5 +261,21 @@ void heapSort(int *vet, int size){
             }
         }
         vet[pai] = t;
+    }
+}
+
+void insertionSort(int *vet, int size){
+    int armazenador, j;
+
+    for(int i = 1; i < size; i++){
+        armazenador = vet[i];
+        j = i - 1;
+
+        while(j >= 0 && vet[j] > armazenador){
+            vet[j+1] = vet[j];
+            j--;
+        }
+
+        vet[j + 1] = armazenador;
     }
 }

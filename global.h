@@ -3,7 +3,7 @@
 
 #define ITERATIONS 999
 #define VARIATION_RANGE 10000
-#define TAM 1000
+#define TAM 10
 
 void popul(int *vet, int size);
 void swap(int *p1, int *p2);
