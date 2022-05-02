@@ -279,3 +279,45 @@ void insertionSort(int *vet, int size){
         vet[j + 1] = armazenador;
     }
 }
+
+void coutingInplace(int *vet, int size) {
+    int largerVal = findLarger(vet);
+    int smallVal = findSmaller(vet);
+
+    int countSize = largerVal - smallVal + 1;
+    int *count = (int*) calloc( countSize, sizeof(int) );
+
+    for(int i = 0; i < size; i++)
+        count[ vet[i] - smallVal ]++;
+
+    for(int i = 0, pos = 0; i < countSize; i++){
+        while(count[i] > 0){
+            vet[pos] = i + smallVal;
+            pos++;
+            count[i]--;
+        }
+    }
+
+    free(count);
+}
+
+void shellSort(int * vet, int size){
+    int pulos[5] = {1,2,3,5,7};
+    int numPulos = 5;
+
+    for(int *p = pulos + (numPulos - 1); p >= pulos; p--){
+        int h = *p;
+
+        for(int i = h; i < size; i++){
+            int temp = vet[i];
+            int j = i;
+
+            while( j > h - 1 && temp <= vet[j - h]){
+
+                vet[j] = vet[j - h];
+                j = j - h;
+            }
+            vet[j] = temp;
+        }
+    }
+}

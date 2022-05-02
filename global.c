@@ -40,3 +40,21 @@ void singleTest(int *vet, int size, void (*f)(int*, int)){
     (*f)(vet, size);
     printVet(vet, size);
 }
+
+int findSmaller(int *vet){
+    int small = vet[0];
+    for(int i = 1; i < TAM; i++){
+        if(vet[i] < small)
+            small = vet[i];
+    }
+    return small;
+}
+
+int findLarger(int *vet){
+    int larger = vet[0];
+    for(int i = 1; i < TAM; i++){
+        if(vet[i] > larger)
+            larger = vet[i];
+    }
+    return larger;
+}
