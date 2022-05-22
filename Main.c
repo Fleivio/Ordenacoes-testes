@@ -27,5 +27,7 @@ int main(){
     printf("\nRadix sort = %.3f secs", speedTest(vet, TAM, &radixSort));
     printf("\nHeap sort = %.3f secs", speedTest(vet, TAM, &heapSort));
     }
+
+    puts("");
     
 }
