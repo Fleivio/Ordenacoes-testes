@@ -21,5 +21,6 @@ void radixSort(int *vet, int size);
 void heapSort(int *vet, int size);
 void coutingInplace(int *vet, int size);
 void shellSort(int *vet, int size);
+void quickSortPointer(int *vet, int size);
 
 #endif

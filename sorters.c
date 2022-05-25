@@ -58,7 +58,8 @@ void whileBubble(int *vet, int size){
 
 //QUICK SORT
 static void _quickSort(int *vet, int begin, int end){
-    int i, j, pivo, aux;
+    if(begin >= end) return;
+    int i, j, pivo;
     i = begin;
     j = end-1;
     pivo = vet[(int)((begin+end)/2)];
@@ -79,15 +80,46 @@ static void _quickSort(int *vet, int begin, int end){
         }
     }
 
-    if(j > begin)
-        _quickSort(vet, begin, j+1);
-    if(i < end)
-        _quickSort(vet, i, end);
+    _quickSort(vet, begin, j+1);
+    _quickSort(vet, i, end);
 }
 
 void quickSort(int *vet, int size){
     _quickSort(vet, 0, size);
 }
+
+
+void _quickSortPointer(int *begin, int *end) { 
+    if (begin >= end)
+        return;
+
+    int pivo = *(begin + ((end - begin) >> 1));
+    int *l = begin;
+    int *r = end;
+    
+    do{ 
+        while(*l < pivo && l <= r)
+            l++;
+        while(*r > pivo && r >= l)
+            r--;
+            
+        if(l <= r){
+            swap(r, l);
+            l++;
+            r--;
+        }
+
+    } while(l < r);
+    
+    _quickSortPointer(begin, r);
+    _quickSortPointer(l, end);
+}
+
+void quickSortPointer(int *vet, int size){
+    _quickSortPointer(vet, vet + size - 1);
+}
+
+
 
 //COCKTAIL SORT
 void cocktailSort(int *vet, int size){
@@ -311,7 +343,7 @@ void insertionSort(int *vet, int size){
     }
 }
 
-
+//SHELL SORT
 void shellSort(int * vet, int size){
     int pulos[5] = {1,2,3,5,7};
     int numPulos = 5;

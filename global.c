@@ -35,10 +35,24 @@ double speedTest(int *vet, int size, void (*f)(int*, int)){
     return (double)(clock() - init) / (double)CLOCKS_PER_SEC;
 }
 
+int isSorted(int *vet, int size){
+    for(int i = 0; i < size-1; i++){
+        if(vet[i] > vet[i+1]){
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void singleTest(int *vet, int size, void (*f)(int*, int)){
     popul(vet, size);
     (*f)(vet, size);
-    printVet(vet, size);
+    
+    if(isSorted(vet, size)){
+        printf("Funciona");
+    }else{
+        printf("Nao funciona");
+    }
 }
 
 int findSmaller(int *vet){

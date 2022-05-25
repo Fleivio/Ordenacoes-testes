@@ -9,7 +9,8 @@ int main(){
     srand(time(NULL));
     int vet[TAM];
 
-    // singleTest(vet, TAM, &insertionSort);
+    // singleTest(vet, TAM, &quickSort);
+    // printVet(vet, TAM);
     
     {
         printf("\nTAMANHO DO VETOR = %d\n", TAM);
@@ -22,8 +23,11 @@ int main(){
     printf("\nShell sort = %.3f secs", speedTest(vet, TAM, &shellSort));
     printf("\nInsertion sort = %.3f secs", speedTest(vet, TAM, &insertionSort));
     printf("\nSelection sort = %.3f secs", speedTest(vet, TAM, &selectionSort));
-    printf("\nQuick sort = %.3f secs", speedTest(vet, TAM, &quickSort));
     printf("\nMerge sort = %.3f secs", speedTest(vet, TAM, &mergeSort));
+
+    printf("\nQuick sort = %.3f secs", speedTest(vet, TAM, &quickSort));
+    printf("\nQuick sort pointer = %.3f secs", speedTest(vet, TAM, &quickSortPointer));
+
     printf("\nRadix sort = %.3f secs", speedTest(vet, TAM, &radixSort));
     printf("\nHeap sort = %.3f secs", speedTest(vet, TAM, &heapSort));
     }
