@@ -7,41 +7,39 @@
 //SELECTION SORT
 void selectionSort(int *vet, int size){
     int min;
+
     for(int i = 0; i < size; i++){
         min = i;
-        for(int j = i+1; j < size; j++){
-            if (vet[j] < vet[min])
+        for(int j = i; j < size; j++){
+            if(vet[j] < vet[min])
                 min = j;
         }
 
-        if(min != i){
-            swap(&vet[min],&vet[i]);
-        }
+        if(min != i)
+        swap(&vet[min], &vet[i]);
     }
 }
 
-void badSelectionSort(int *vet, int size){
-    for(int i = 0; i < size; i++){
-        for(int j = i; j < size; j++){
-            if(vet[i] > vet[j])
-                swap(&vet[i],&vet[j]);
+//INSERTION SORT
+void insertionSort(int *vet, int size){
+    int tmp, j;
+
+    for(int i = 1; i < size; i++){
+        tmp = vet[i];
+        j = i - 1;
+
+        while(j >= 0 && vet[j] > tmp){
+            vet[j+1] = vet[j];
+            j--;
         }
+
+        vet[j + 1] = tmp;
     }
 }
 
 
 //BUBBLE SORT
-void simpleBubble(int *vet, int size){
-    for(int i = size-1; i > 0; i--){
-        for(int j = 0; j <= i; j++){
-            if(vet[j] > vet[j+1]){
-                swap(&vet[j], &vet[j+1]);
-            }
-        }
-    }
-}
-
-void whileBubble(int *vet, int size){
+void bubbleSort(int *vet, int size){
     int ordened = 0;
     int i = size - 1;
     while(!ordened && i > 0){
@@ -55,6 +53,78 @@ void whileBubble(int *vet, int size){
         i--;
     }
 }
+
+//SORTIN BY COUNTING
+void coutingInplace(int *vet, int size) {
+    int largerVal = findLarger(vet);
+    int smallVal = findSmaller(vet);
+
+    int countSize = largerVal - smallVal + 1;
+    int *count = (int*) calloc( countSize, sizeof(int) );
+
+    for(int i = 0; i < size; i++)
+        count[ vet[i] - smallVal ]++;
+
+    for(int i = 0, pos = 0; i < countSize; i++){
+        while(count[i] > 0){
+            vet[pos] = i + smallVal;
+            pos++;
+            count[i]--;
+        }
+    }
+
+    free(count);
+}
+
+//COCKTAIL SORT
+void cocktailSort(int *vet, int size){
+    int ordened = 0;
+    int bottom = 0;
+    int top = size - 1;
+    
+    while(ordened == 0 && bottom < top){
+        ordened = 1;
+
+        for(int i = bottom; i < top; i++){
+            if(vet[i] > vet[i+1]){
+                swap(&vet[i], &vet[i+1]);
+                ordened = 0;
+            }
+        }
+        top--;
+
+        for(int i = top; i > bottom; i--){
+            if(vet[i] < vet[i-1]){
+                swap(&vet[i], &vet[i-1]);
+                ordened = 0;
+            }
+        }
+        bottom++;
+    }
+}
+
+//ODD EVEN SORT
+void oddEvenSort(int *vet, int size){
+    int ordened = 0;
+    while(!ordened){
+        ordened = 1;
+
+        for(int i = 1; i < size - 1; i += 2){
+            if(vet[i] > vet[i+1]){
+                swap(&vet[i],&vet[i+1]);
+                ordened = 0;
+            }
+        }
+
+        for(int i = 0; i < size-1; i += 2){
+            if(vet[i] > vet[i+1]){
+                swap(&vet[i], &vet[i+1]);
+                ordened = 0;
+            }
+        }
+    }
+}
+
 
 //QUICK SORT
 static void _quickSort(int *vet, int begin, int end){
@@ -119,146 +189,44 @@ void quickSortPointer(int *vet, int size){
     _quickSortPointer(vet, vet + size - 1);
 }
 
-
-
-//COCKTAIL SORT
-void cocktailSort(int *vet, int size){
-    int ordened = 0;
-    int bottom = 0;
-    int top = size - 1;
-    
-    while(ordened == 0 && bottom < top){
-        ordened = 1;
-
-        for(int i = bottom; i < top; i++){
-            if(vet[i] > vet[i+1]){
-                swap(&vet[i], &vet[i+1]);
-                ordened = 0;
-            }
-        }
-        top--;
-
-        for(int i = top; i > bottom; i--){
-            if(vet[i] < vet[i-1]){
-                swap(&vet[i], &vet[i-1]);
-                ordened = 0;
-            }
-        }
-        bottom++;
-    }
-}
-
-//ODD EVEN SORT
-void oddEvenSort(int *vet, int size){
-    int ordened = 0;
-    while(!ordened){
-        ordened = 1;
-
-        for(int i = 1; i < size - 1; i += 2){
-            if(vet[i] > vet[i+1]){
-                swap(&vet[i],&vet[i+1]);
-                ordened = 0;
-            }
-        }
-
-        for(int i = 0; i < size-1; i += 2){
-            if(vet[i] > vet[i+1]){
-                swap(&vet[i], &vet[i+1]);
-                ordened = 0;
-            }
-        }
-    }
-}
-
-//SORTIN BY COUNTING
-void sortingBCouting(int *vet, int size){
-    int v[TAM];
-
-    for (int i = size-1; i >= 1; i--){
-        for (int j = i-1; j >= 0; j--){
-            if(vet[i] < vet[j])
-                v[j]++;
-            else
-                v[i]++;
-        }
-    }
-
-    int result[size];
-    for(int i = 0; i < size; i++){
-        result[v[i]] = vet[i];
-    }
-
-    for(int i = 0; i < size; i++){
-        vet[i] = result[i];
-    }
-}
-
-void coutingInplace(int *vet, int size) {
-    int largerVal = findLarger(vet);
-    int smallVal = findSmaller(vet);
-
-    int countSize = largerVal - smallVal + 1;
-    int *count = (int*) calloc( countSize, sizeof(int) );
-
-    for(int i = 0; i < size; i++)
-        count[ vet[i] - smallVal ]++;
-
-    for(int i = 0, pos = 0; i < countSize; i++){
-        while(count[i] > 0){
-            vet[pos] = i + smallVal;
-            pos++;
-            count[i]--;
-        }
-    }
-
-    free(count);
-}
-
 //MERGE SORT
-static void merge(int *vet, int p, int q, int r){
-    int n1 = q - p;
-    int n2 = r - q;
+static void merge(int *vet, int n, int m) {
     int i, j, k;
-
-    int * L = malloc(n1 * sizeof(int));
-    int * R = malloc(n2 * sizeof(int));
-
-    for (i=0; i<n1; i++)
-        L[i] = vet[p+i];
-    for (j=0; j<n2; j++)
-        R[j] = vet[q+j];
-
-    i = 0;
-    j = 0;
-
-    for(k=p;k<r;k++){
-        if(j>=n2 || i<n1 && L[i]<=R[j])
-            vet[k] = L[i++];
-        else
-            vet[k] = R[j++];
+    int *x = malloc(n * sizeof (int));
+    for (i = 0, j = m, k = 0; k < n; k++) {
+        x[k] = j == n      ? vet[i++]
+             : i == m      ? vet[j++]
+             : vet[j] < vet[i] ? vet[j++]
+             :               vet[i++];
     }
-
-    free(L);
-    free(R);
+    for (i = 0; i < n; i++) {
+        vet[i] = x[i];
+    }
+    free(x);
 }
 
-static void mergePart(int *vet, int p, int r){
-    int q;
-
-    if ((r - p) < 2)
+void mergeSort(int *vet, int size) {
+    if (size < 2)
         return;
-
-    q = (p+r)/2;
-
-    mergePart(vet, p, q);
-    mergePart(vet, q, r);
-    merge(vet, p, q, r);
+    int m = size / 2;
+    mergeSort(vet, m);
+    mergeSort(vet + m, size - m);
+    merge(vet, size, m);
 }
 
-void mergeSort(int *vet, int size){
-    mergePart(vet, 0, size);
+//SHELL SORT
+void shellSort(int * vet, int size){
+    int h, i, j, t;
+    for (h = size; h /= 2;) {
+        for (i = h; i < size; i++) {
+            t = vet[i];
+            for (j = i; j >= h && t < vet[j - h]; j -= h) {
+                vet[j] = vet[j - h];
+            }
+            vet[j] = t;
+        }
+    }
 }
-
 
 //RADIX SORT
 void radixSort(int *vet, int size) {
@@ -325,43 +293,3 @@ void heapSort(int *vet, int size){
         vet[pai] = t;
     }
 }
-
-//INSERTION SORT
-void insertionSort(int *vet, int size){
-    int armazenador, j;
-
-    for(int i = 1; i < size; i++){
-        armazenador = vet[i];
-        j = i - 1;
-
-        while(j >= 0 && vet[j] > armazenador){
-            vet[j+1] = vet[j];
-            j--;
-        }
-
-        vet[j + 1] = armazenador;
-    }
-}
-
-//SHELL SORT
-void shellSort(int * vet, int size){
-    int pulos[5] = {1,2,3,5,7};
-    int numPulos = 5;
-
-    for(int *p = pulos + (numPulos - 1); p >= pulos; p--){
-        int h = *p;
-
-        for(int i = h; i < size; i++){
-            int temp = vet[i];
-            int j = i;
-
-            while( j > h - 1 && temp <= vet[j - h]){
-
-                vet[j] = vet[j - h];
-                j = j - h;
-            }
-            vet[j] = temp;
-        }
-    }
-}
-

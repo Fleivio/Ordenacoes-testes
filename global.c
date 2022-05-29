@@ -4,10 +4,15 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 void popul(int *vet, int size){
-    for(int i = 0; i < size; i++){
-        vet[i] = rand() % VARIATION_RANGE;
+    if(VARIATION_RANGE == 0){
+        for(int i = 0; i < size; i++){
+            vet[i] = i;
+        }
+    }else{
+        for(int i = 0; i < size; i++){
+            vet[i] = rand() % VARIATION_RANGE;
+        }
     }
 }
 

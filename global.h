@@ -1,7 +1,7 @@
 #ifndef GLOBAL
 #define GLOBAL
 
-#define ITERATIONS 999
+#define ITERATIONS 1000
 #define VARIATION_RANGE 10000
 #define TAM 1000
 
