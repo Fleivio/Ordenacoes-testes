@@ -27,4 +27,9 @@ void radix_sort(int *a, int len);
 
 void heapSort(int *vet, int size);
 
+void combSort(int *vet, int size);
+
+void gnomeSort(int *vet, int size);
+
+void pancakeSort(int *vet, int size);
 #endif

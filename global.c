@@ -53,10 +53,9 @@ void singleTest(int *vet, int size, void (*f)(int*, int)){
     popul(vet, size);
     (*f)(vet, size);
     
-    if(isSorted(vet, size)){
-        printf("Funciona");
-    }else{
-        printf("Nao funciona");
+    if(!isSorted(vet, size)){
+        printf("Não funciona");
+        exit(0);
     }
 }
 

@@ -2,7 +2,7 @@
 #include "global.h"
 
 #include <stdlib.h>
-#include <limits.h>
+
 
 //SELECTION SORT
 void selectionSort(int *vet, int size){
@@ -291,5 +291,75 @@ void heapSort(int *vet, int size){
             }
         }
         vet[pai] = t;
+    }
+}
+
+//COMB SORT
+void combSort(int *vet, int size) {
+    int i, j, gap, swapped = 1;
+    int temp;
+
+    gap = size;
+
+    while (gap > 1 || swapped == 1)
+    {
+        gap = gap * 10 / 13;
+        if (gap == 9 || gap == 10) gap = 11;
+        if (gap < 1) gap = 1;
+        swapped = 0;
+
+        for (i = 0, j = gap; j < size; i++, j++)
+        {
+            if (vet[i] > vet[j])
+            {
+                swap(&vet[i], &vet[j]);
+                swapped = 1;
+            }
+        }
+    }
+}
+
+//GNOME SORT
+void gnomeSort(int *vet, int size)
+{
+    int i=1, j=2, t;
+
+    while(i < size) {
+        if (vet[i - 1] > vet[i]) {
+            swap(&vet[i-1], &vet[i]);
+            if (--i) continue;
+        }
+
+        i = j++;
+    }
+}
+
+//PANCAKE SORT
+
+void do_flip(int *vet, int num)
+{
+    for(int i = 0; i < --num ; i++){
+        swap(&vet[i], &vet[num]);
+    }
+}
+
+void pancakeSort(int *vet, int size){
+    int i, a, max_num_pos;
+
+    for(i = size; i > 1 ; i--){
+        max_num_pos=0;
+        for( a = 0; a < i ; a++){
+            if(vet[a]>vet[max_num_pos])
+                max_num_pos=a;
+        }
+
+        if(max_num_pos == i-1)
+            continue;
+
+        if(max_num_pos){
+            do_flip(vet, max_num_pos+1);
+        }
+
+        do_flip(vet, i);
     }
 }

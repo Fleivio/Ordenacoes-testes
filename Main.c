@@ -9,7 +9,7 @@ int main(){
     srand(time(NULL));
     int vet[TAM];
 
-    // singleTest(vet, TAM, &mergeSort);
+    // singleTest(vet, TAM, &pancakeSort);
     // printVet(vet, TAM);
     
     {
@@ -34,6 +34,12 @@ int main(){
     printf("\nRadix sort = %.3f secs", speedTest(vet, TAM, &radixSort));
 
     printf("\nHeap sort = %.3f secs", speedTest(vet, TAM, &heapSort));
+
+    printf("\nComb sort = %.3f secs", speedTest(vet, TAM, &combSort));
+
+    printf("\nGnome sort = %.3f secs", speedTest(vet, TAM, &gnomeSort));
+    
+    printf("\nPancake sort = %.3f secs", speedTest(vet, TAM, &pancakeSort));
 
     }
     
