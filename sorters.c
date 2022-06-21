@@ -230,17 +230,11 @@ void shellSort(int * vet, int size){
 
 //RADIX SORT
 void radixSort(int *vet, int size) {
-    int maior = vet[0];
     int exp = 1;
 
-    int *b = (int *)calloc(size, sizeof(int));
+    int *aux = (int *)calloc(size, sizeof(int));
 
-    for (int i = 0; i < size; i++) {
-        if (vet[i] > maior)
-    	    maior = vet[i];
-    }
-
-    while (maior/exp > 0) {
+    while (VARIATION_RANGE/exp > 0) {
         int bucket[10] = { 0 };
 
     	for (int i = 0; i < size; i++)
@@ -250,15 +244,15 @@ void radixSort(int *vet, int size) {
     	    bucket[i] += bucket[i - 1];
 
     	for (int i = size - 1; i >= 0; i--)
-    	    b[--bucket[(vet[i] / exp) % 10]] = vet[i];
+    	    aux[--bucket[(vet[i] / exp) % 10]] = vet[i];
 
     	for (int i = 0; i < size; i++)
-    	    vet[i] = b[i];
+    	    vet[i] = aux[i];
 
     	exp *= 10;
     }
 
-    free(b);
+    free(aux);
 }
 
 //HEAP SORT
